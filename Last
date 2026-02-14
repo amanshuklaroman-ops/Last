@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Kajal 💖</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Dancing+Script:wght@500&family=Poppins:wght@300;400&display=swap');
+
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    radial-gradient(circle at center, rgba(255,182,193,0.4), transparent 60%),
+    linear-gradient(135deg,#ff4d6d,#9d4edd,#3a0ca3);
+  color:white;
+}
+
+/* GLASS CARD */
+.slide{
+  text-align:center;
+  padding:30px;
+  width:85%;
+  max-width:350px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(15px);
+  box-shadow:0 8px 40px rgba(0,0,0,0.4);
+  position:absolute;
+  transition:opacity 1.2s ease, transform 1.2s ease;
+}
+
+.hide{opacity:0; transform:scale(0.9);}
+.show{opacity:1; transform:scale(1);}
+
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+}
+
+.hand{
+  font-family:'Dancing Script',cursive;
+  font-size:22px;
+}
+
+.btn{
+  margin:12px;
+  padding:12px 32px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  color:white;
+  background:linear-gradient(45deg,#ff4d6d,#ff8fab);
+  box-shadow:0 8px 25px rgba(255,77,109,.45);
+}
+
+.teddy{
+  width:200px;
+  margin:20px auto;
+  animation:float 3.5s ease-in-out infinite;
+}
+
+/* HEARTBEAT GLOW */
+.heartbeat{
+  animation:heartBeat 1.8s infinite;
+}
+
+@keyframes heartBeat{
+  0%{box-shadow:0 0 0 rgba(255,77,109,0.4);}
+  50%{box-shadow:0 0 40px rgba(255,77,109,0.8);}
+  100%{box-shadow:0 0 0 rgba(255,77,109,0.4);}
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+}
+
+/* ROSES */
+.rose{
+  position:absolute;
+  top:-20px;
+  animation:fall 10s linear infinite;
+  opacity:0.85;
+}
+
+@keyframes fall{
+  from{transform:translateY(-10px)}
+  to{transform:translateY(110vh)}
+}
+
+/* SPARKLES */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+  from{opacity:0.3; transform:scale(0.8)}
+  to{opacity:1; transform:scale(1.2)}
+}
+
+/* YES BURST */
+.pop{
+  position:absolute;
+  font-size:22px;
+  animation:pop 1.2s ease-out forwards;
+}
+
+@keyframes pop{
+  from{opacity:1; transform:scale(1)}
+  to{opacity:0; transform:scale(2)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- SLIDE 1 -->
+<div class="slide show" id="s1">
+  <h1>Happy Valentine Day</h1>
+  <p class="hand">Teddy Bear 🐻</p>
+  <button class="btn" onclick="next(1)">Next 💖</button>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide hide heartbeat" id="s2" style="display:none">
+  <h1>Will you be my Valentine</h1>
+  <p class="hand">Kajal Pandey</p>
+
+  <button class="btn" onclick="yes()">Yes 💘</button>
+  <button class="btn" onclick="next(2)">No</button>
+
+  <audio id="beat" loop>
+    <source src="heartbeat.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide hide" id="s3" style="display:none">
+
+  <p class="hand">
+    Happy valentine's day ab tum to bologe nahi mai hi bol deta huu
+  </p>
+
+  <p>
+    Kajal pandey I Love You so much
+  </p>
+
+  <p class="hand">Will you be mine</p>
+
+  <img src="teddy.gif" class="teddy">
+
+  <p class="hand">
+    I will always love you the way I love you today.<br>
+    Every time I see you, my eyes fill with nothing but love.
+  </p>
+
+  <button class="btn" onclick="playMusic()">Play Music 🎶</button>
+
+  <audio id="music">
+    <source src="sawaal.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+function next(n){
+  if(n==1){
+    document.getElementById("beat").play();
+  }
+
+  let cur=document.getElementById("s"+n);
+  let nxt=document.getElementById("s"+(n+1));
+
+  cur.classList.add("hide");
+
+  setTimeout(()=>{
+    cur.style.display="none";
+    nxt.style.display="block";
+    nxt.classList.add("show");
+  },1200);
+}
+
+function yes(){
+  document.getElementById("beat").pause();
+
+  for(let i=0;i<30;i++){
+    let h=document.createElement("div");
+    h.className="pop";
+    h.innerHTML=Math.random()>0.5?"❤️":"💋";
+    h.style.left=Math.random()*100+"%";
+    h.style.top=Math.random()*100+"%";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1200);
+  }
+
+  next(2);
+}
+
+function playMusic(){
+  document.getElementById("music").play();
+}
+
+/* ROSES */
+const roses=["🌹","🥀","🌺","🌸","🌷"];
+for(let i=0;i<50;i++){
+  let r=document.createElement("div");
+  r.className="rose";
+  r.innerHTML=roses[Math.floor(Math.random()*roses.length)];
+  r.style.left=Math.random()*100+"%";
+  r.style.fontSize=(14+Math.random()*14)+"px";
+  r.style.animationDuration=(7+Math.random()*7)+"s";
+  document.body.appendChild(r);
+}
+
+/* SPARKLES */
+for(let i=0;i<30;i++){
+  let s=document.createElement("div");
+  s.className="sparkle";
+  s.innerHTML="✨";
+  s.style.left=Math.random()*100+"%";
+  s.style.top=Math.random()*100+"%";
+  document.body.appendChild(s);
+}
+</script>
+
+</body>
+</html>
